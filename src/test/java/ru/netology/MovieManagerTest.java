@@ -110,6 +110,23 @@ public class MovieManagerTest {
     }
 
     @Test
+    public void shouldFindTheLasOneFromNumberOfMoviesSameTheLimit() {
+        MovieManager manager = new MovieManager(5);
+
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+
+
+        Movies[] expected = {film5, film4, film3, film2, film1};
+        Movies[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
     public void shouldFindTheLasOneFromMoreThen5() {
         MovieManager manager = new MovieManager(7);
 
@@ -141,4 +158,39 @@ public class MovieManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldFindTheLasOneFromLessThenLimit() {
+        MovieManager manager = new MovieManager(5);
+
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+
+
+        Movies[] expected = {film3, film2, film1};
+        Movies[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindTheLasOneFromMoreThenLimit() {
+        MovieManager manager = new MovieManager(4);
+
+        manager.add(film1);
+        manager.add(film2);
+        manager.add(film3);
+        manager.add(film4);
+        manager.add(film5);
+
+
+        Movies[] expected = {film5, film4, film3, film2};
+        Movies[] actual = manager.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+
 }
+
